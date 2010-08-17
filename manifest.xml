@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin_manifest>
+	<field key="author" value="THINK Global School" />
+	<field key="version" value="1.8" />
+	<field key="description" value="Provides Google Calendar integration" />
+	<field key="website" value="http://thinkglobalschool.org" />
+	<field key="copyright" value="(C) THINK Global School 2008-2010" />
+	<field key="licence" value="GNU Public License version 2" />
+	<field key="elgg_install_state" value="enabled" />
+	<field key="admin_interface" value="simple" />
+</plugin_manifest>
