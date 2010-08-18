@@ -28,13 +28,12 @@ function calSources() {
 //add in css properties for the feeds as stored in the entity
 function setCalColors() {
 	for (var guid in calendars) {
-		$(".feed"+guid+" > a").css('background-color','#'+calendars[guid]['background_color']);
-		$(".feed"+guid+" > a").css('border-color','#'+calendars[guid]['background_color']);
-		$(".feed"+guid+" > a").css('color','#'+calendars[guid]['text_color']);
 		
-		$(".feed"+guid).css('background-color','#'+calendars[guid]['background_color']);
-		$(".feed"+guid).css('border-color','#'+calendars[guid]['background_color']);
-		$(".feed"+guid).css('color','#'+calendars[guid]['text_color']);
+		//css pattern from Full Calendar documentation
+		selector = ".feed"+guid+" a,.feed"+guid+",.fc-agenda .feed"+guid+" .fc-event-time";
+		$(selector).css('background-color','#'+calendars[guid]['background_color']);
+		$(selector).css('border-color','#'+calendars[guid]['background_color']);
+		$(selector).css('color','#'+calendars[guid]['text_color']);	
 	}
 }
 
@@ -74,3 +73,4 @@ $(document).ready(function() {
 });
 </script>
 <div id="calendar"></div>
+<!-- For debug><p><a href="javascript:setCalColors()">Set Colors</a></p> -->
