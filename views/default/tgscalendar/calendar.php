@@ -1,9 +1,9 @@
-<!-- relying on the Elgg copy of jQuery <script type='text/javascript' src='<?= $vars['url'].'mod/sandbox/js/' ?>jquery.js'></script>  -->
 <script type='text/javascript' src='<?= $vars['url'].'mod/tgscalendar/js/' ?>fullcalendar.js'></script>
 <script type='text/javascript' src='<?= $vars['url'].'mod/tgscalendar/js/' ?>gcal.js'></script>
 <script type='text/javascript'>
 var calendars={};
 <?php
+
 //build javascript array from calendar entities
 $calendars = $vars['calendars'];
 foreach($calendars as $calendar) {
@@ -25,6 +25,7 @@ function calSources() {
 	return sources;
 }
 
+//add in css properties for the feeds as stored in the entity
 function setCalColors() {
 	for (var guid in calendars) {
 		$(".feed"+guid+" > a").css('background-color','#'+calendars[guid]['background_color']);
@@ -37,6 +38,7 @@ function setCalColors() {
 	}
 }
 
+//toggle calendar requested and rebuild display
 function toggleCal(guid) {
 	calendars[guid]['display'] = !(calendars[guid]['display']);
 	$('#calendar').empty();
@@ -57,9 +59,17 @@ function buildCal() {
   });
 }
 
+
+
 $(document).ready(function() {
+		setCalColors();
 		// page is now ready, initialize the calendar...
 		buildCal();
+		
+		//bit of a hack - but it's the only event that keeps the colors set consistently
+		$('#calendar').click(function() {
+			setCalColors();
+		});
 
 });
 </script>

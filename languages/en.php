@@ -1,12 +1,11 @@
 <?php
 /**
- * Blog English language file.
+ * TGS Calendar English language file.
  *
  */
-
 $english = array(
 	'tgscalendar:calendars' => 'Calendars',
-	'tgscalendar:admin_title' => 'Calendar Admin',
+	'tgscalendar:admin_title' => 'Calendar Administration',
 	'tgscalendar:add_button' => 'Add Calendar',
 	'tgscalendar:add_cal_title' => 'Add New Calendar',
 	'tgscalendar:edit_cal_title' => 'Edit Calendar',

@@ -5,7 +5,7 @@
 		return;
 	}
 	
-	echo "<ul>";
+	echo "<ul class='admin_calendar_list'>";
 	foreach ($calendars as $cal) {
 		echo elgg_view('tgscalendar/admin/view_cal',array('entity'=>$cal));
 	}

@@ -37,5 +37,5 @@ $edit_link = "<a href='{$edit_url}'>Edit</a>";
 
 ?>
 <li>
-	<a href="<?= $cal->google_cal_feed ?>" style="color: #<?= $cal->text_color ?>; background-color: #<?= $cal->background_color ?>;"><?= $cal->title ?></a> - <?= $access_level ?> - <?= $edit_link ?> - <?= $delete_link ?>
+	<a class="admin_calendar_link" href="<?= $cal->google_cal_feed ?>" style="color: #<?= $cal->text_color ?>; background-color: #<?= $cal->background_color ?>;"><?= $cal->title ?></a> - <?= $access_level ?> <span class="admin_calendar_controls"><?= $edit_link ?> | <?= $delete_link ?></span>
 </li>

@@ -8,3 +8,8 @@
 .cal_toggle {
 	float: right;
 }
+
+#calendar {
+	margin-top: 30px;
+}
+
