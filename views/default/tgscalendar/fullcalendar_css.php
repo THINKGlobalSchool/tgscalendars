@@ -228,6 +228,7 @@ table.fc-header {
 .fc-view { /* prevents dragging outside of widget */
 	width: 100%;
 	overflow: hidden;
+	z-index: 0;
 	}
 	
 	
