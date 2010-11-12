@@ -15,7 +15,7 @@ function tgscalendar_init() {
 	elgg_extend_view('css','tgscalendar/fullcalendar_css');
 	elgg_extend_view('css','tgscalendar/css');
 	elgg_extend_view('css','tgscalendar/cal_css');
-	elgg_extend_view('canvas/layouts/administration','tgscalendar/admin/css');
+	elgg_extend_view('layouts/administration','tgscalendar/admin/css');
 	
 	add_menu(elgg_echo('tgscalendar:calendars'), "{$CONFIG->wwwroot}pg/calendar/", array());
 	
@@ -63,6 +63,6 @@ function tgscalendar_admin_page_handler($page) {
 	$entity = get_entity($guid);
 	$content .= elgg_view('tgscalendar/admin/edit',array('entity'=>$entity));
 	
-	$body = elgg_view_layout('administration', $content);
+	$body = elgg_view_layout('administration', array('content' => $content));
 	page_draw($title, $body, 'page_shells/admin');
 }
