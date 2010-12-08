@@ -44,7 +44,7 @@ function tgscalendar_page_handler($page) {
 	$content = elgg_view('tgscalendar/calendar', array('calendars'=>$calendars));
 	
 	$body = elgg_view_layout('one_column_with_sidebar', $content, $sidebar);
-	page_draw($title, $body);
+	echo elgg_view_page($title, $body);
 }
 
 function tgscalendar_admin_page_handler($page) {
@@ -64,5 +64,5 @@ function tgscalendar_admin_page_handler($page) {
 	$content .= elgg_view('tgscalendar/admin/edit',array('entity'=>$entity));
 	
 	$body = elgg_view_layout('administration', array('content' => $content));
-	page_draw($title, $body, 'page_shells/admin');
+	echo elgg_view_page($title, $body, 'admin');
 }
