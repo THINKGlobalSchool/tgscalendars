@@ -22,8 +22,8 @@ function tgscalendar_init() {
 	register_page_handler('calendar','tgscalendar_page_handler');
 	register_page_handler('calendar_admin','tgscalendar_admin_page_handler');
 	
-	register_action('tgscalendar/save',false, $CONFIG->pluginspath . 'tgscalendar/actions/save.php');
-	register_action('tgscalendar/delete',false,$CONFIG->pluginspath . 'tgscalendar/actions/delete.php');
+	elgg_register_action('tgscalendar/save', $CONFIG->pluginspath . 'tgscalendar/actions/save.php');
+	elgg_register_action('tgscalendar/delete',$CONFIG->pluginspath . 'tgscalendar/actions/delete.php');
 	
 	register_elgg_event_handler('pagesetup','system','tgscalendar_admin_submenus');
 }
