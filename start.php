@@ -12,9 +12,9 @@
 function tgscalendar_init() {
 	global $CONFIG;
 	
-	elgg_extend_view('css','tgscalendar/fullcalendar_css');
-	elgg_extend_view('css','tgscalendar/css');
-	elgg_extend_view('css','tgscalendar/cal_css');
+	elgg_extend_view('css/screen','tgscalendar/fullcalendar_css');
+	elgg_extend_view('css/screen','tgscalendar/css');
+	elgg_extend_view('css/screen','tgscalendar/cal_css');
 	elgg_extend_view('layouts/administration','tgscalendar/admin/css');
 	
 	add_menu(elgg_echo('tgscalendar:calendars'), "{$CONFIG->wwwroot}pg/calendar/", array());
