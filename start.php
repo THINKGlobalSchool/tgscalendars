@@ -9,48 +9,102 @@
  * Documentation available at http://arshaw.com/fullcalendar/docs/
  */
 
+/**
+ * Init
+ */
 function tgscalendar_init() {
-	global $CONFIG;
+	// css
+	$url = elgg_get_simplecache_url('css', 'tgscalendar/css');
+	elgg_register_css('tgs:gcal', $url);
+
+	$url = elgg_get_simplecache_url('css', 'tgscalendar/fullcalendar');
+	elgg_register_css('tgs:fullcalendar', $url);
+
+	// js
+	$url = elgg_get_simplecache_url('js', 'tgscalendar/fullcalendar.min');
+	elgg_register_js('tgs:fullcalendar', $url, 'head', 100);
+
+	$url = elgg_get_simplecache_url('js', 'tgscalendar/gcal');
+	elgg_register_js('tgs:gcal', $url, 'head', 200);
+
+	$url = elgg_get_simplecache_url('js', 'tgscalendar/tgscalendar');
+	elgg_register_js('tgs:calendar', $url);
 	
-	elgg_extend_view('css/screen','tgscalendar/fullcalendar_css');
-	elgg_extend_view('css/screen','tgscalendar/css');
-	elgg_extend_view('css/screen','tgscalendar/cal_css');
-	elgg_extend_view('layouts/administration','tgscalendar/admin/css');
+	// menus
+	elgg_register_menu_item('site', array(
+		'url' => 'pg/calendar/',
+		'text' => elgg_echo('tgscalendar:calendars')
+	));
+
+	// handlers
+	register_page_handler('calendar', 'tgscalendar_page_handler');
+	register_page_handler('calendar_admin', 'tgscalendar_admin_page_handler');
+
+	// actions
+	$action_path = dirname(__FILE__) . '/actions/tgscalendar';
 	
-	add_menu(elgg_echo('tgscalendar:calendars'), "{$CONFIG->wwwroot}pg/calendar/", array());
-	
-	register_page_handler('calendar','tgscalendar_page_handler');
-	register_page_handler('calendar_admin','tgscalendar_admin_page_handler');
-	
-	elgg_register_action('tgscalendar/save', $CONFIG->pluginspath . 'tgscalendar/actions/save.php');
-	elgg_register_action('tgscalendar/delete',$CONFIG->pluginspath . 'tgscalendar/actions/delete.php');
-	
-	register_elgg_event_handler('pagesetup','system','tgscalendar_admin_submenus');
+	elgg_register_action('tgscalendar/save', "$action_path/save.php");
+	elgg_register_action('tgscalendar/delete', "$action_path/delete.php");
 }
-register_elgg_event_handler('init','system','tgscalendar_init');
 
-
-function tgscalendar_admin_submenus() {
-	global $CONFIG;
-	
-	elgg_add_submenu_item(array('text'=>elgg_echo('tgscalendar:admin_title'),'href'=>"{$CONFIG->url}pg/calendar_admin",'id'=>'calendar_admin'),'admin');
-}
-
+/**
+ * Serves a single page: the calendar.
+ *
+ * @param array $page
+ */
 function tgscalendar_page_handler($page) {
 	gatekeeper();
 	
-	$calendars = elgg_get_entities(array('type'=>'object','subtype'=>'google_cal'));
-	$sidebar = elgg_view('tgscalendar/sidebar', array('calendars'=>$calendars));
-	$content = elgg_view('tgscalendar/calendar', array('calendars'=>$calendars));
+	$calendars = elgg_get_entities(array(
+		'type' => 'object',
+		'subtype' => 'google_cal'
+	));
+
+	// register page menu items for each calendar
+	foreach ($calendars as $calendar) {
+		$guid = $calendar->getGUID();
+		$input = elgg_view('input/checkbox', array(
+			'id' => 'elgg-tgscalendar-' . $guid,
+			'class' => 'right elgg-tgscalendar-calendar-toggler',
+			'checked' => 'checked'
+		));
+		$text = "<label class=\"mhs\" >$calendar->title$input</label>";
+		
+		elgg_register_menu_item('tgscalendar-sidebar', array(
+			'name' => 'elgg-tgscalendar-' . $guid,
+			'text' => $text,
+			'href' => false,
+			'class' => 'elgg-tgscalendar',
+			'item_class' => 'pvm mvm elgg-tgscalendar-feed elgg-tgscalendar-feed-' . $guid
+		));
+	}
 	
-	$body = elgg_view_layout('one_column_with_sidebar', $content, $sidebar);
+	//$sidebar = elgg_view('tgscalendar/sidebar', array('calendars' => $calendars));
+	$content = elgg_view('tgscalendar/calendar', array('calendars' => $calendars));
+
+	$sidebar = elgg_view_title(elgg_echo('tgscalendar:calendars'));
+	$sidebar .= elgg_view_menu('tgscalendar-sidebar', array(
+
+	));
+	
+	$body = elgg_view_layout('content', array(
+		'content' => $content
+	));
+
+	$body = elgg_view_layout('one_sidebar', array(
+		'filter_context' => 'all',
+		'content' => $content,
+		'title' => $title,
+		'sidebar' => $sidebar
+	));
+	
 	echo elgg_view_page($title, $body);
 }
 
 function tgscalendar_admin_page_handler($page) {
 	global $CONFIG;
 	admin_gatekeeper();
-	elgg_admin_add_plugin_settings_sidemenu();
+
 	set_context('admin');
 	
 	$title = elgg_echo('tgscalendar:admin_title');
@@ -66,3 +120,5 @@ function tgscalendar_admin_page_handler($page) {
 	$body = elgg_view_layout('administration', array('content' => $content));
 	echo elgg_view_page($title, $body, 'admin');
 }
+
+register_elgg_event_handler('init', 'system', 'tgscalendar_init');
