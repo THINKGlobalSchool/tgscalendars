@@ -7,9 +7,9 @@ elgg_load_js('tgs:fullcalendar');
 elgg_load_js('tgs:gcal');
 elgg_load_js('tgs:calendar');
 
-elgg_load_css('tgs:gcal');
+elgg_load_css('tgs:calendar');
 elgg_load_css('tgs:fullcalendar');
-elgg_load_css('tgs:calendar_css');
+elgg_load_css('tgs:calendars_css');
 
 //build javascript array from calendar entities
 $calendars = $vars['calendars'];
@@ -26,7 +26,7 @@ foreach($calendars as $calendar) {
 $json = json_encode($info);
 ?>
 <script type='text/javascript'>
-	// the elgg JS object is already loaded at this point, so we can't do this without wrapping in
+	// the elgg JS object is already loaded at this point, so we can do this without wrapping in
 	// $() or hooks.
 	// kids, don't try this at home.
 	elgg.provide('elgg.tgsCalendar');

@@ -18,12 +18,12 @@ function tgscalendar_init() {
 	elgg_register_css('tgs:fullcalendar', $url, 100);
 
 	$url = elgg_get_simplecache_url('css', 'tgscalendar/css');
-	elgg_register_css('tgs:gcal', $url, 200);
+	elgg_register_css('tgs:calendar', $url, 200);
 
 	// this is a special url that calls the views and builds the colors for the calendars
 	// it is not cached.
 	$url = 'pg/ajax/view/tgscalendar/calendars_css';
-	elgg_register_css('tgs:calendar_css', $url);
+	elgg_register_css('tgs:calendars_css', $url);
 
 	// js
 	$url = elgg_get_simplecache_url('js', 'tgscalendar/fullcalendar.min');
@@ -37,13 +37,15 @@ function tgscalendar_init() {
 	
 	// menus
 	elgg_register_menu_item('site', array(
-		'url' => 'pg/calendar/',
+		'name' => 'tgscalendar',
+		'href' => 'pg/calendar/',
 		'text' => elgg_echo('tgscalendar:calendars')
 	));
 
+	elgg_register_admin_menu_item('configure', 'tgscalendar', 'appearance');
+
 	// handlers
 	register_page_handler('calendar', 'tgscalendar_page_handler');
-	register_page_handler('calendar_admin', 'tgscalendar_admin_page_handler');
 
 	// actions
 	$action_path = dirname(__FILE__) . '/actions/tgscalendar';
@@ -73,14 +75,14 @@ function tgscalendar_page_handler($page) {
 			'class' => 'right elgg-tgscalendar-calendar-toggler',
 			'checked' => 'checked'
 		));
-		$text = "<label class=\"mhs\" >$calendar->title$input</label>";
+		$text = "<label>$calendar->title$input</label>";
 		
 		elgg_register_menu_item('tgscalendar-sidebar', array(
 			'name' => 'elgg-tgscalendar-' . $guid,
 			'text' => $text,
 			'href' => false,
 			'class' => 'elgg-tgscalendar',
-			'item_class' => 'pvm mvm elgg-tgscalendar-feed elgg-tgscalendar-feed-' . $guid
+			'item_class' => 'pam mvm elgg-tgscalendar-feed elgg-tgscalendar-feed-' . $guid
 		));
 	}
 	
@@ -106,24 +108,43 @@ function tgscalendar_page_handler($page) {
 	echo elgg_view_page($title, $body);
 }
 
-function tgscalendar_admin_page_handler($page) {
-	global $CONFIG;
-	admin_gatekeeper();
+/**
+ * Prepare form vars optionally from an entity
+ *
+ * @param mixed $entity 
+ * @return arary
+ */
+function tgscalendar_prepare_form_vars($calendar = null) {
+	// input names => defaults
+	$values = array(
+		'title' => '',
+		'google_cal_feed' => '',
+		'text_color' => '',
+		'background_color' => '',
+		'access_id' => ACCESS_DEFAULT,
+		'guid' => ''
+	);
 
-	set_context('admin');
-	
-	$title = elgg_echo('tgscalendar:admin_title');
-	
-	$content = elgg_view_title(elgg_echo('tgscalendar:admin_title'));
-	$content .= elgg_view('tgscalendar/admin/cal_list');
-	
-	//check to see if we want to edit an entry
-	$guid = get_input('guid');
-	$entity = get_entity($guid);
-	$content .= elgg_view('tgscalendar/admin/edit',array('entity'=>$entity));
-	
-	$body = elgg_view_layout('administration', array('content' => $content));
-	echo elgg_view_page($title, $body, 'admin');
+	if (elgg_is_sticky_form('tgscalendar-save')) {
+		foreach (array_keys($values) as $field) {
+			$values[$field] = elgg_get_sticky_value('tgscalendar-save', $field);
+		}
+	}
+
+	elgg_clear_sticky_form('tgscalendar-save');
+
+	if (!$calendar) {
+		return $values;
+	}
+
+	foreach (array_keys($values) as $field) {
+		if (isset($calendar->$field)) {
+			$values[$field] = $calendar->$field;
+		}
+	}
+
+	$values['entity'] = $calendar;
+	return $values;
 }
 
 register_elgg_event_handler('init', 'system', 'tgscalendar_init');

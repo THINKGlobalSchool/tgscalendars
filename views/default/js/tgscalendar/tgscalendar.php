@@ -19,6 +19,11 @@ elgg.tgsCalendar.init = function() {
 	$('.elgg-tgscalendar-calendar-toggler').live('click', elgg.tgsCalendar.toggleCalendar);
 }
 
+/**
+ * Returns the calendars
+ *
+ * @return {Object}
+ */
 elgg.tgsCalendar.getCalendars = function() {
 	return elgg.tgsCalendar.calendars;
 }

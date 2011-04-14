@@ -4,6 +4,10 @@
  *
  */
 $english = array(
+	// admin
+	'admin:appearance:tgscalendar' => 'Calendars',
+	
+
 	'tgscalendar:calendars' => 'Calendars',
 	'tgscalendar:admin_title' => 'Calendar Administration',
 	'tgscalendar:add_button' => 'Add Calendar',
@@ -12,8 +16,12 @@ $english = array(
 	'tgscalendar:feed_label' => 'Google Calendar Feed URL',
 	'tgscalendar:text_color_label' => 'Text Color (eg. FFFFFF - white)',
 	'tgscalendar:background_color_label' => 'Background Color (eg. 000000 - black)',
+
 	'tgscalendar:save:success' => 'Calendar saved successfully',
 	'tgscalendar:save:error' => 'There was an error saving your calendar',
+
+	'tgscalendar:error:calendar_not_found' => 'Invalid calendar.',
+	'tgscalendar:error:missing_fields' => 'You must fill in the title and feed URL',
 );
 
 add_translation('en', $english);

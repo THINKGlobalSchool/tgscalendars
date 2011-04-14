@@ -1,6 +1,8 @@
 <?php
 /* 
  * Generates the CSS for calendars
+ *
+ * This is not served up as a normal CSS file because we don't want it to be cached.
  */
 header('Content-type: text/css', true);
 

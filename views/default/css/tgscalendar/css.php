@@ -8,7 +8,7 @@
 	-webkit-border-radius: 10px;
 }
 
-/* overrides for default css */
+/* overrides for fullcalendar's default css */
 .fc-event,
 .fc-agenda .fc-event-time,
 .fc-event a {
