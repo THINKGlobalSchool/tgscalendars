@@ -1,10 +1,3 @@
-.cal_label {
-	margin: 5px 0 5px 0;
-	padding: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
-}
-
 .elgg-tgscalendar-feed label {
 	color: inherit;
 }
@@ -13,4 +6,14 @@
 	border-radius: 10px;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
+}
+
+/* overrides for default css */
+.fc-event,
+.fc-agenda .fc-event-time,
+.fc-event a {
+	border-style: solid;
+	border-color: inherit;
+	background-color: inherit;
+	color: inherit;
 }

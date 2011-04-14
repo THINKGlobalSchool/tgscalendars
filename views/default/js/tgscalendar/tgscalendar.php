@@ -34,12 +34,7 @@ elgg.tgsCalendar.buildCalendar = function(calendars) {
 			center: 'title',
 			right: 'month,agendaWeek,agendaDay'
 		},
-		eventSources: elgg.tgsCalendar.buildSources(calendars),
-		loading: function(isloading, view) {
-			if (!isloading) {
-				elgg.tgsCalendar.setColors(calendars);
-			}
-		}
+		eventSources: elgg.tgsCalendar.buildSources(calendars)
 	});
 }
 
@@ -60,21 +55,6 @@ elgg.tgsCalendar.buildSources = function(calendars) {
 	});
 
 	return sources;
-}
-
-/**
- * Add in css properties for the feeds as stored in the entity
- */
-elgg.tgsCalendar.setColors = function(calendars) {
-	$.each(calendars, function(guid, calendar) {
-		//css pattern from Full Calendar documentation
-		var selector = ".elgg-tgscalendar-feed-" + guid + " a, .elgg-tgscalendar-feed-" + guid
-			+ ", .fc-agenda .elgg-tgscalendar-feed-" + guid + " .fc-event-time";
-		
-		$(selector).css('background-color', '#' + calendar['background_color']);
-		$(selector).css('border-color', '#' + calendar['background_color']);
-		$(selector).css('color', '#' + calendar['text_color']);
-	});
 }
 
 /*

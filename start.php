@@ -14,11 +14,16 @@
  */
 function tgscalendar_init() {
 	// css
-	$url = elgg_get_simplecache_url('css', 'tgscalendar/css');
-	elgg_register_css('tgs:gcal', $url);
-
 	$url = elgg_get_simplecache_url('css', 'tgscalendar/fullcalendar');
-	elgg_register_css('tgs:fullcalendar', $url);
+	elgg_register_css('tgs:fullcalendar', $url, 100);
+
+	$url = elgg_get_simplecache_url('css', 'tgscalendar/css');
+	elgg_register_css('tgs:gcal', $url, 200);
+
+	// this is a special url that calls the views and builds the colors for the calendars
+	// it is not cached.
+	$url = 'pg/ajax/view/tgscalendar/calendars_css';
+	elgg_register_css('tgs:calendar_css', $url);
 
 	// js
 	$url = elgg_get_simplecache_url('js', 'tgscalendar/fullcalendar.min');

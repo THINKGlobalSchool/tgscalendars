@@ -9,6 +9,7 @@ elgg_load_js('tgs:calendar');
 
 elgg_load_css('tgs:gcal');
 elgg_load_css('tgs:fullcalendar');
+elgg_load_css('tgs:calendar_css');
 
 //build javascript array from calendar entities
 $calendars = $vars['calendars'];
