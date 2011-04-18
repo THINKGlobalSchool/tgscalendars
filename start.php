@@ -81,18 +81,14 @@ function tgscalendar_page_handler($page) {
 			'name' => 'elgg-tgscalendar-' . $guid,
 			'text' => $text,
 			'href' => false,
-			'class' => 'elgg-tgscalendar',
 			'item_class' => 'pam mvm elgg-tgscalendar-feed elgg-tgscalendar-feed-' . $guid
 		));
 	}
 	
-	//$sidebar = elgg_view('tgscalendar/sidebar', array('calendars' => $calendars));
 	$content = elgg_view('tgscalendar/calendar', array('calendars' => $calendars));
 
 	$sidebar = elgg_view_title(elgg_echo('tgscalendar:calendars'));
-	$sidebar .= elgg_view_menu('tgscalendar-sidebar', array(
-
-	));
+	$sidebar .= elgg_view_menu('tgscalendar-sidebar');
 	
 	$body = elgg_view_layout('content', array(
 		'content' => $content
