@@ -17,6 +17,8 @@ $english = array(
 	'tgscalendar:text_color_label' => 'Text Color (eg. FFFFFF - white)',
 	'tgscalendar:background_color_label' => 'Background Color (eg. 000000 - black)',
 
+	'tgscalendar:admin:no_calendars' => 'No Calendars',
+
 	'tgscalendar:save:success' => 'Calendar saved successfully',
 	'tgscalendar:save:error' => 'There was an error saving your calendar',
 
