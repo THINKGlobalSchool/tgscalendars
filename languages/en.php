@@ -6,7 +6,7 @@
 $english = array(
 	// admin
 	'admin:appearance:tgscalendar' => 'Calendars',
-	
+	'item:object:google_cal' => 'Google Calendars',
 
 	'tgscalendar:calendars' => 'Calendars',
 	'tgscalendar:admin_title' => 'Calendar Administration',
