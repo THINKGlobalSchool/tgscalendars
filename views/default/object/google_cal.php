@@ -16,7 +16,7 @@ $delete_link = elgg_view('output/confirmlink', array(
 //build edit link
 $edit_url = "admin/appearance/tgscalendar?guid=$cal->guid";
 $edit_url = elgg_normalize_url($edit_url);
-$edit_link = "<a class=\"elgg-toggler\" href=\"#elgg-tgscalendar-edit-$cal->guid\">" . elgg_echo('edit') . '</a>';
+$edit_link = "<a rel=\"toggle\" href=\"#elgg-tgscalendar-edit-$cal->guid\">" . elgg_echo('edit') . '</a>';
 
 ?>
 <li class="pam mam elgg-tgscalendar-feed elgg-tgscalendar-feed-<?php echo $cal->guid; ?>">
