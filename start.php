@@ -15,10 +15,11 @@
 function tgscalendar_init() {
 	// css
 	$url = elgg_get_simplecache_url('css', 'tgscalendar/fullcalendar');
-	
+	elgg_register_simplecache_view('css/tgscalendar/fullcalendar');
 	elgg_register_css('tgs:fullcalendar', $url, 100);
 
 	$url = elgg_get_simplecache_url('css', 'tgscalendar/css');
+	elgg_register_simplecache_view('css/tgscalendar/css');
 	elgg_register_css('tgs:calendar', $url, 200);
 
 	// this is a special url that calls the views and builds the colors for the calendars
@@ -28,12 +29,15 @@ function tgscalendar_init() {
 
 	// js
 	$url = elgg_get_simplecache_url('js', 'tgscalendar/fullcalendar.min');
+	elgg_register_simplecache_view('js/tgscalendar/fullcalendar.min');
 	elgg_register_js('tgs:fullcalendar', $url, 'head', 100);
 
 	$url = elgg_get_simplecache_url('js', 'tgscalendar/gcal');
+	elgg_register_simplecache_view('js/tgscalendar/gcal');
 	elgg_register_js('tgs:gcal', $url, 'head', 200);
 
 	$url = elgg_get_simplecache_url('js', 'tgscalendar/tgscalendar');
+	elgg_register_simplecache_view('js/tgscalendar/tgscalendar');
 	elgg_register_js('tgs:calendar', $url);
 	
 	// menus
