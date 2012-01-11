@@ -50,7 +50,7 @@ function tgscalendar_init() {
 	elgg_register_admin_menu_item('configure', 'tgscalendar', 'appearance');
 
 	// handlers
-	register_page_handler('calendar', 'tgscalendar_page_handler');
+	elgg_register_page_handler('calendar', 'tgscalendar_page_handler');
 
 	// actions
 	$action_path = dirname(__FILE__) . '/actions/tgscalendar';
@@ -148,4 +148,4 @@ function tgscalendar_prepare_form_vars($calendar = null) {
 	return $values;
 }
 
-register_elgg_event_handler('init', 'system', 'tgscalendar_init');
+elgg_register_event_handler('init', 'system', 'tgscalendar_init');
