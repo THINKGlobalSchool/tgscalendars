@@ -16,6 +16,7 @@ $english = array(
 	'tgscalendar:feed_label' => 'Google Calendar Feed URL',
 	'tgscalendar:text_color_label' => 'Text Color (eg. FFFFFF - white)',
 	'tgscalendar:background_color_label' => 'Background Color (eg. 000000 - black)',
+	'tgscalendar:tgscalendars' => 'TGS Calendars',
 
 	'tgscalendar:admin:no_calendars' => 'No Calendars',
 

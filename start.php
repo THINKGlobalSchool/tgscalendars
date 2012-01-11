@@ -30,11 +30,11 @@ function tgscalendar_init() {
 	// js
 	$url = elgg_get_simplecache_url('js', 'tgscalendar/fullcalendar.min');
 	elgg_register_simplecache_view('js/tgscalendar/fullcalendar.min');
-	elgg_register_js('tgs:fullcalendar', $url, 'head', 100);
+	elgg_register_js('tgs:fullcalendar', $url, 'head', 900);
 
 	$url = elgg_get_simplecache_url('js', 'tgscalendar/gcal');
 	elgg_register_simplecache_view('js/tgscalendar/gcal');
-	elgg_register_js('tgs:gcal', $url, 'head', 200);
+	elgg_register_js('tgs:gcal', $url, 'head', 1000);
 
 	$url = elgg_get_simplecache_url('js', 'tgscalendar/tgscalendar');
 	elgg_register_simplecache_view('js/tgscalendar/tgscalendar');
@@ -72,6 +72,8 @@ function tgscalendar_page_handler($page) {
 		'subtype' => 'google_cal'
 	));
 
+	$title = elgg_echo('tgscalendar:tgscalendars');
+
 	// register page menu items for each calendar
 	foreach ($calendars as $calendar) {
 		$guid = $calendar->getGUID();
@@ -105,7 +107,7 @@ function tgscalendar_page_handler($page) {
 		'title' => $title,
 		'sidebar' => $sidebar
 	));
-	
+
 	echo elgg_view_page($title, $body);
 }
 

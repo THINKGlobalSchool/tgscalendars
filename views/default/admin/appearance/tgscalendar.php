@@ -13,6 +13,8 @@ $calendars = elgg_get_entities(array(
 	'subtype'=>'google_cal'
 ));
 
+echo "<h3>Note: Make sure that 'wrap views' is disabled under: Develop -> Settings <br /> It WILL interfere with the CSS output</h3>";
+
 if ($calendars) {
 	echo '<ul class="elgg-tgscalendar-admin">';
 	foreach($calendars as $cal) {
