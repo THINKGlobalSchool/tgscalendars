@@ -39,6 +39,9 @@ function tgscalendar_init() {
 	$url = elgg_get_simplecache_url('js', 'tgscalendar/tgscalendar');
 	elgg_register_simplecache_view('js/tgscalendar/tgscalendar');
 	elgg_register_js('tgs:calendar', $url);
+
+	// Whitelist ajax views
+	elgg_register_ajax_view('tgscalendar/calendars_css');
 	
 	// menus
 	elgg_register_menu_item('site', array(
