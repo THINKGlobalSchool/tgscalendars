@@ -46,7 +46,7 @@ function tgscalendar_init() {
 	// menus
 	elgg_register_menu_item('site', array(
 		'name' => 'tgscalendar',
-		'href' => 'pg/calendar/',
+		'href' => 'calendar/',
 		'text' => elgg_echo('tgscalendar:calendars')
 	));
 
