@@ -3,14 +3,13 @@
 	<name>Google Calendar</name>
 	<author>THINK Global School</author>
 	<version>1.8</version>
+	<category>enhancement</category>
+	<category>tgs</category>
 	<description>Provides Google Calendar integration</description>
 	<website>http://thinkglobalschool.org</website>
 	<copyright>(C) THINK Global School 2008-2010</copyright>
 	<licence>GNU Public License version 2</licence>
-
 	<activate_on_install>true</activate_on_install>
-	<admin_interface>simple</admin_interface>
-
    	<requires>
 		<type>elgg_version</type>
 		<version>2010111501</version>
