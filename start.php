@@ -43,12 +43,14 @@ function tgscalendar_init() {
 	// Whitelist ajax views
 	elgg_register_ajax_view('tgscalendar/calendars_css');
 	
-	// menus
-	elgg_register_menu_item('site', array(
-		'name' => 'tgscalendar',
-		'href' => 'calendar/',
-		'text' => elgg_echo('tgscalendar:calendars')
-	));
+	// Register menu for logged in users
+	if (elgg_is_logged_in()) {
+		elgg_register_menu_item('site', array(
+			'name' => 'tgscalendar',
+			'href' => 'calendar/',
+			'text' => elgg_echo('tgscalendar:calendars')
+		));
+	}
 
 	elgg_register_admin_menu_item('configure', 'tgscalendar', 'appearance');
 
