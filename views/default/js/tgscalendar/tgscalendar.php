@@ -68,8 +68,8 @@ elgg.tgsCalendar.buildSources = function(calendars) {
 elgg.tgsCalendar.toggleCalendar = function() {
 	var guid = $(this).attr('id').split('-')[2];
 	var calendars = elgg.tgsCalendar.getCalendars();
-	
-	calendars[guid]['display'] = $(this).attr('checked');
+
+	calendars[guid]['display'] = $(this).is(':checked');
 
 	$('#elgg-tgscalendar').empty();
 	elgg.tgsCalendar.buildCalendar(calendars);
