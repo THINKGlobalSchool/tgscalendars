@@ -20,7 +20,7 @@ foreach ($calendars as $calendar) {
 echo <<<___CSS
 	.elgg-tgscalendar-feed-$guid a,
 	.elgg-tgscalendar-feed-$guid,
-	.elgg-tgscalendar-feed-$guid > .fc-event-skin {
+	.elgg-tgscalendar-feed-$guid .fc-event-skin {
 		background-color: #$bg_color;
 		border-color: #$bg_color;
 		color: #$color

@@ -17,3 +17,7 @@
 .elgg-tgscalendar-feed input {
 	margin: 2px 2px 2px 5px !important;
 }
+
+.fc-agenda-slots td div {
+	height: 45px;
+}
