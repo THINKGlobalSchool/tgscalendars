@@ -14,9 +14,9 @@
  */
 function tgscalendar_init() {
 	// css
-	$url = elgg_get_simplecache_url('css', 'tgscalendar/fullcalendar');
-	elgg_register_simplecache_view('css/tgscalendar/fullcalendar');
-	elgg_register_css('tgs:fullcalendar', $url, 100);
+	$url = elgg_get_simplecache_url('css', 'fullcalendar');
+	elgg_register_simplecache_view('css/fullcalendar');
+	elgg_register_css('tgs.fullcalendar', $url, 100);
 
 	$url = elgg_get_simplecache_url('css', 'tgscalendar/css');
 	elgg_register_simplecache_view('css/tgscalendar/css');
@@ -87,30 +87,30 @@ function tgscalendar_page_handler($page) {
 			'class' => 'right elgg-tgscalendar-calendar-toggler',
 			'checked' => 'checked'
 		));
-		$text = "<label>$calendar->title$input</label>";
+		$text = "<label>$calendar->title</label>$input";
 		
-		elgg_register_menu_item('tgscalendar-sidebar', array(
+		elgg_register_menu_item('tgscalendar-filter', array(
 			'name' => 'elgg-tgscalendar-' . $guid,
 			'text' => $text,
 			'href' => false,
-			'item_class' => 'pam mvm elgg-tgscalendar-feed elgg-tgscalendar-feed-' . $guid
+			'item_class' => 'pas mrs elgg-tgscalendar-feed elgg-tgscalendar-feed-' . $guid
 		));
 	}
-	
-	$content = elgg_view('tgscalendar/calendar', array('calendars' => $calendars));
 
-	$sidebar = elgg_view_title(elgg_echo('tgscalendar:calendars'));
-	$sidebar .= elgg_view_menu('tgscalendar-sidebar');
-	
+	$content = elgg_view_menu('tgscalendar-filter', array(
+		'class' => 'elgg-menu-hz'
+	));
+
+	$content .= elgg_view('tgscalendar/calendar', array('calendars' => $calendars));
+
 	$body = elgg_view_layout('content', array(
 		'content' => $content
 	));
 
-	$body = elgg_view_layout('one_sidebar', array(
-		'filter_context' => 'all',
+	$body = elgg_view_layout('content', array(
+		'filter' => '',
 		'content' => $content,
 		'title' => $title,
-		'sidebar' => $sidebar
 	));
 
 	echo elgg_view_page($title, $body);
