@@ -97,20 +97,18 @@ function tgscalendar_page_handler($page) {
 		));
 	}
 
-	$content = elgg_view_menu('tgscalendar-filter', array(
+	$content = "<div class='elgg-head clearfix'><h2 class='elgg-heading-main'>{$title}</h2></div>";
+
+	$content .= elgg_view_menu('tgscalendar-filter', array(
 		'class' => 'elgg-menu-hz'
 	));
 
 	$content .= elgg_view('tgscalendar/calendar', array('calendars' => $calendars));
 
-	$body = elgg_view_layout('content', array(
-		'content' => $content
-	));
-
-	$body = elgg_view_layout('content', array(
+	$body = elgg_view_layout('one_column', array(
 		'filter' => '',
 		'content' => $content,
-		'title' => $title,
+		'title' => '',
 	));
 
 	echo elgg_view_page($title, $body);
