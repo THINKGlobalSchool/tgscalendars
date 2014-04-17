@@ -7,11 +7,11 @@
 	<category>tgs</category>
 	<description>Provides Google Calendar integration</description>
 	<website>http://thinkglobalschool.org</website>
-	<copyright>(C) THINK Global School 2008-2010</copyright>
+	<copyright>THINK Global School 2010 - 2014</copyright>
 	<licence>GNU Public License version 2</licence>
 	<activate_on_install>true</activate_on_install>
    	<requires>
-		<type>elgg_version</type>
-		<version>2010111501</version>
+		<type>elgg_release</type>
+		<version>1.8</version>
 	</requires>
 </plugin_manifest>
