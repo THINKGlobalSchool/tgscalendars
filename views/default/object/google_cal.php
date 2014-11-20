@@ -20,9 +20,9 @@ $edit_link = "<a rel=\"toggle\" href=\"#elgg-tgscalendar-edit-$cal->guid\">" . e
 
 ?>
 <li class="pam mam elgg-tgscalendar-feed elgg-tgscalendar-feed-<?php echo $cal->guid; ?>">
-	<a href="<? echo $cal->google_cal_feed ?>">
-	<? echo $cal->title ?></a> - <? echo $access_level; ?>
-	<span class="right"><? echo $edit_link; ?> | <? echo $delete_link; ?></span>
+	<a href="<?php echo $cal->google_cal_feed ?>">
+	<?php echo $cal->title ?></a> - <?php echo $access_level; ?>
+	<span class="right"><?php echo $edit_link; ?> | <?php echo $delete_link; ?></span>
 	<div class="hidden" id="elgg-tgscalendar-edit-<?php echo $cal->guid; ?>">
 		<?php
 		$vars = tgscalendar_prepare_form_vars($cal);
