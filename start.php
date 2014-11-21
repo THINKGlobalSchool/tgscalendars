@@ -99,6 +99,8 @@ function tgscalendar_page_handler($page) {
 
 	$content = "<div class='elgg-head clearfix'><h2 class='elgg-heading-main'>{$title}</h2></div>";
 
+	$content .= "<span class='mbm message warning'>Notice: We're currently experiencing issues with the Calendar API. We'll have this fixed soon!</span>";
+
 	$content .= elgg_view_menu('tgscalendar-filter', array(
 		'class' => 'elgg-menu-hz'
 	));
