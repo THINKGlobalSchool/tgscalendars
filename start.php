@@ -13,6 +13,10 @@
  * Init
  */
 function tgscalendar_init() {
+	// Register and load library
+	elgg_register_library('elgg:tgscalendars', elgg_get_plugins_path() . 'tgscalendars/lib/tgscalendars.php');
+	elgg_load_library('elgg:tgscalendars');
+	
 	// css
 	$url = elgg_get_simplecache_url('css', 'fullcalendar');
 	elgg_register_simplecache_view('css/fullcalendar');

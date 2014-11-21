@@ -19,6 +19,12 @@ $english = array(
 	'tgscalendar:tgscalendars' => 'TGS Calendars',
 
 	'tgscalendar:admin:no_calendars' => 'No Calendars',
+	'tgscalendar:admin:api_client_id' => 'Google API Client ID',
+	'tgscalendar:admin:service_address' => 'Google API Service Account Email Address',
+	'tgscalendar:admin:authentication' => 'Client Authentication',
+	'tgscalendar:admin:keylocation' => 'Location of Service Account Private Key',
+	'tgscalendar:admin:keypassword' => 'Service key password',
+	'tgscalendar:admin:impersonate' => 'Impersonate (Admin) User',
 
 	'tgscalendar:save:success' => 'Calendar saved successfully',
 	'tgscalendar:save:error' => 'There was an error saving your calendar',
