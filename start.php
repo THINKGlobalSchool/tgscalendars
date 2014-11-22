@@ -13,6 +13,10 @@
  * Init
  */
 function tgscalendar_init() {
+	// Register and load library
+	elgg_register_library('elgg:tgscalendars', elgg_get_plugins_path() . 'tgscalendars/lib/tgscalendars.php');
+	elgg_load_library('elgg:tgscalendars');
+	
 	// css
 	$url = elgg_get_simplecache_url('css', 'fullcalendar');
 	elgg_register_simplecache_view('css/fullcalendar');
@@ -32,8 +36,8 @@ function tgscalendar_init() {
 	elgg_register_simplecache_view('js/tgscalendar/fullcalendar.min');
 	elgg_register_js('tgs:fullcalendar', $url, 'head', 900);
 
-	$url = elgg_get_simplecache_url('js', 'tgscalendar/gcal');
-	elgg_register_simplecache_view('js/tgscalendar/gcal');
+	$url = elgg_get_simplecache_url('js', 'tgscalendar/spotgcal');
+	elgg_register_simplecache_view('js/tgscalendar/spotgcal');
 	elgg_register_js('tgs:gcal', $url, 'head', 1000);
 
 	$url = elgg_get_simplecache_url('js', 'tgscalendar/tgscalendar');
@@ -71,49 +75,65 @@ function tgscalendar_init() {
  */
 function tgscalendar_page_handler($page) {
 	gatekeeper();
-	
-	$calendars = elgg_get_entities(array(
-		'type' => 'object',
-		'subtype' => 'google_cal'
-	));
 
-	$title = elgg_echo('tgscalendar:tgscalendars');
+	if ($page[0] == 'load') {
+		$id = get_input('id', FALSE);
+		$start_date = get_input('start_date', FALSE);
+		$end_date = get_input('end_date', FALSE);
+		$class_name = get_input('class_name', FALSE);
 
-	// register page menu items for each calendar
-	foreach ($calendars as $calendar) {
-		$guid = $calendar->getGUID();
-		$input = elgg_view('input/checkbox', array(
-			'id' => 'elgg-tgscalendar-' . $guid,
-			'class' => 'right elgg-tgscalendar-calendar-toggler',
-			'checked' => 'checked'
+		if (!$id) {
+			return FALSE;
+		} else {
+			echo json_encode(tgscalendars_get_events($id, $class_name, $start_date, $end_date));
+		}
+	} else {
+		$calendars = elgg_get_entities(array(
+			'type' => 'object',
+			'subtype' => 'google_cal'
 		));
-		$text = "<label>$calendar->title</label>$input";
-		
-		elgg_register_menu_item('tgscalendar-filter', array(
-			'name' => 'elgg-tgscalendar-' . $guid,
-			'text' => $text,
-			'href' => false,
-			'item_class' => 'pas mrs elgg-tgscalendar-feed elgg-tgscalendar-feed-' . $guid
+
+		$title = elgg_echo('tgscalendar:tgscalendars');
+
+		// register page menu items for each calendar
+		foreach ($calendars as $calendar) {
+			$guid = $calendar->getGUID();
+			$input = elgg_view('input/checkbox', array(
+				'id' => 'elgg-tgscalendar-' . $guid,
+				'class' => 'right elgg-tgscalendar-calendar-toggler',
+				'checked' => 'checked'
+			));
+			$text = "<label>$calendar->title</label>$input";
+			
+			elgg_register_menu_item('tgscalendar-filter', array(
+				'name' => 'elgg-tgscalendar-' . $guid,
+				'text' => $text,
+				'href' => false,
+				'item_class' => 'pas mrs elgg-tgscalendar-feed elgg-tgscalendar-feed-' . $guid
+			));
+		}
+
+		$content .= elgg_view_menu('tgscalendar-filter', array(
+			'class' => 'elgg-menu-hz'
 		));
+
+		$content = "<div class='elgg-head clearfix'><h2 class='elgg-heading-main'>{$title}</h2></div>";
+
+		$content .= elgg_view_menu('tgscalendar-filter', array(
+			'class' => 'elgg-menu-hz'
+		));
+
+		$content .= elgg_view('tgscalendar/calendar', array('calendars' => $calendars));
+
+		$body = elgg_view_layout('one_column', array(
+			'filter' => '',
+			'content' => $content,
+			'title' => '',
+		));
+
+		echo elgg_view_page($title, $body);
 	}
-
-	$content = "<div class='elgg-head clearfix'><h2 class='elgg-heading-main'>{$title}</h2></div>";
-
-	$content .= "<span class='mbm message warning'>Notice: We're currently experiencing issues with the Calendar API. We'll have this fixed soon!</span>";
-
-	$content .= elgg_view_menu('tgscalendar-filter', array(
-		'class' => 'elgg-menu-hz'
-	));
-
-	$content .= elgg_view('tgscalendar/calendar', array('calendars' => $calendars));
-
-	$body = elgg_view_layout('one_column', array(
-		'filter' => '',
-		'content' => $content,
-		'title' => '',
-	));
-
-	echo elgg_view_page($title, $body);
+	return TRUE;
 }
 
 /**

@@ -14,4 +14,10 @@
 		<type>elgg_release</type>
 		<version>1.8</version>
 	</requires>
+	<requires>
+		<type>plugin</type>
+		<name>google-api-php-client</name>
+		<version>1.8</version>
+		<comparison>ge</comparison>
+	</requires>
 </plugin_manifest>
