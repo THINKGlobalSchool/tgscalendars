@@ -73,58 +73,5 @@ $auth_body = <<<HTML
 HTML;
 echo elgg_view_module('inline', $auth_title, $auth_body);
 
-
-$client = tgscalendars_get_google_service_client();
-
-elgg_load_library('gapc:Calendar');
-
-
-$service = new Google_Service_Calendar($client);
-
-$cal = 'thinkglobalschool.com_ratln5107b7tmnroc54c1f4p4o@group.calendar.google.com';
-
-$optParams = array(
-	'showDeleted' => 'false'
-);
-
-$events = $service->events->listEvents($cal, $optParams);
-
-$event_array = array();
-
-foreach ($events->getItems() as $item) {
-	// elgg_dump('Start ' . $item->getStart()->getDateTime());
-	// elgg_dump('End   ' . $item->getEnd()->getDateTime());
-
-	// Determine if this is an all day event
-	if (!$item->getStart()->getDateTime()) {
-		$allDay = true;
-	}
-
-	// Figure out start date
-	$start_string = $item->getStart()->getDateTime() ? $item->getStart()->getDateTime() : $item->getStart()->getDate();
-
-	// Figure out end date
-	$end_string = $item->getEnd()->getDateTime() ? $item->getEnd()->getDateTime() : $item->getEnd()->getDate();
-
-	// Format dates
-	$format = "d/m/Y H:i";
-	$start = date($format, strtotime($start_string));
-	$end = date($format, strtotime($end_string));
-
-	// Add event to event array
-	$event_array[] = array(
-		'id' => $item->getId(),
-		'title' => $item->getSummary(),
-		'url' => $item->getHtmlLink(),
-		'start' => $start,
-		'end' => $end,
-		'allDay' => $allDay,
-		'location' => $item->getLocation(),
-		'description' => $item->getDescription(),
-		'className' => '',//@TODO
-		'editable' => false,
-	);
-}
-
-elgg_dump($event_array);
+elgg_dump(tgscalendars_get_events("04/10/2014 14:00", "04/11/2014 14:00"));
 

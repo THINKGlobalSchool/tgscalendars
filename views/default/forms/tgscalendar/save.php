@@ -17,7 +17,7 @@ $title_input = elgg_view('input/text', array(
 	'value' => $title
 ));
 
-$cal_feed_label = elgg_echo('tgscalendar:feed_label');
+$cal_feed_label = elgg_echo('tgscalendar:calendar_id');
 $cal_feed_input = elgg_view('input/text', array(
 	'name' => 'google_cal_feed',
 	'value' => $google_cal_feed

@@ -54,7 +54,7 @@ elgg.tgsCalendar.buildSources = function(calendars) {
 	var i = 0;
 	$.each(calendars, function(k, v) {
 		if (v.display) {
-			sources[i] = $.fullCalendar.gcalFeed(v.url, {className: 'elgg-tgscalendar-feed-' + k});
+			sources[i] = $.fullCalendar.spotgcalFeed(v.url, {className: 'elgg-tgscalendar-feed-' + k});
 			i++;
 		}
 	});
