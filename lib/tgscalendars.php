@@ -98,6 +98,7 @@ function tgscalendars_get_events($calendar_id, $class_name = FALSE, $start_date 
 
 	foreach ($events->getItems() as $item) {
 		// Determine if this is an all day event		
+		$allDay = FALSE;
 		if (!$item->getStart()->getDateTime()) {
 			$allDay = true;
 		}
