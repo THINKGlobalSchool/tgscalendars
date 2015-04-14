@@ -17,9 +17,9 @@ function tgscalendars_get_google_service_client() {
 	$client = new Google_Client();
 	$client->setApplicationName("TGS Google Calendars");
 
-	if ($plugin->service_token) {
-		$client->setAccessToken($plugin->service_token);
-	}
+	// if ($plugin->service_token) {
+	// 	$client->setAccessToken($plugin->service_token);
+	// }
 
 	// Get auth/key info from plugin settings
 	$key_location = elgg_get_plugin_setting('google_api_client_service_key', 'tgscalendars');
